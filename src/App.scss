@@ -1,0 +1,66 @@
+//Variables
+$cream: #E9E0B8;
+$teal: #5AA5A1;
+$red: #EA6542;
+$orange: #DE7930;
+$blue: #1E2857;
+$white: #fff;
+
+
+//typography
+
+h1{
+    font-size: 2em;
+    margin: .5em
+}
+
+a{
+    color: $teal;
+
+    &:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+//form
+input{
+    margin: .5em;
+}
+
+
+.App {
+  text-align: center;
+  background: $cream;
+  font-size: 16px;
+  color: $blue;
+}
+
+.App-header {
+  background-color: $red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: $white;
+}
+
+.main{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2em 0;
+}
+
+.meme-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+canvas{
+    display: block;
+    clear: both;
+    margin: 0 auto;
+}
