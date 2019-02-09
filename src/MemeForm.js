@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
+import Dropzone from 'react-dropzone';
 class MemeForm extends Component{
+
 
 	constructor(props){
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.onDrop = this.onDrop.bind(this);
 		this.fileInput = React.createRef();
 	}
 
@@ -58,8 +61,6 @@ class MemeForm extends Component{
           ctx.fillText(this.state.topText, 50, 50);
 		  ctx.fillText(this.state.bottomText, 50, sizedHeight - 35);
 		  var url = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-		  //var url = canvas.toDataURL("image/png");
-		 // url = url.replace(/^data:image\/[^;]+/, 'data:application/octet-stream');
 		  this.setState({ download: url});
 		}
 
@@ -67,13 +68,34 @@ class MemeForm extends Component{
 
 	}
 
-	// handleDownload = (e) => {
-	// 	var canvas = this.refs.canvas
-	// 	var dataURL = canvas.toDataURL('image/png');
-    // 	this.setState({ download: dataURL});
-	// 	console.log(dataURL);
-	// 	link.click();
-	// }
+	onDrop = (files) => {
+	 console.log('drop');
+	 var file = files[0];
+
+	 var reader = new FileReader();
+
+	 reader.onload = (event) => {
+	   this.setState({ image: event.target.result });
+
+	   const canvas = this.refs.canvas;
+	   const ctx = canvas.getContext("2d");
+	   const image = this.refs.image;
+	   // console.log(image);
+	   const sizedWidth = image.clientWidth;
+	   const originalHeight = image.naturalHeight;
+	   const originalWidth = image.naturalWidth;
+
+	   const sizedHeight = (sizedWidth/originalWidth) * originalHeight;
+	   this.setState({ height: sizedHeight});
+
+	   //ctx.drawImage(image, 0, 0)
+	   ctx.drawImage(image, 0, 0, originalWidth, originalHeight, 0, 0, sizedWidth, sizedHeight);
+	   var url = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+	   this.setState({ download: url});
+	 }
+
+	 reader.readAsDataURL(file);
+   }
 
 	render() {
       return (
@@ -87,6 +109,18 @@ class MemeForm extends Component{
 					value={this.state.value}
 					onChange={this.handleValueChange}
 				/>
+
+				<Dropzone
+		          onDrop={this.onDrop.bind(this)}
+		        >
+		          {({getRootProps, getInputProps}) => (
+		            <div {...getRootProps()}>
+		              <input {...getInputProps()} />
+		                <p>Drop files here, or click to select files</p>
+		            </div>
+		          )}
+		        </Dropzone>
+
 	  			<input
 					type="text"
 					name="bottomText"
@@ -96,17 +130,18 @@ class MemeForm extends Component{
 					onChange={this.handleValueChange}
 				/>
 
-				<input type="file" ref={this.fileInput} />
+
 
 				<input
 					type="submit"
 					value="Make It!"
+					onChange={this.handleValueUpload}
 				/>
 
 	  		</form>
 			<canvas ref="canvas" id="canvas" width={this.state.width} height={this.state.height}></canvas>
 			<img className="meme-image" ref="image" src={this.state.image} alt="" height="auto" width='600'/>
-			<a className="downlaod" id="download" href={this.state.download} download="meme.png" target="_blank">Download</a>
+			<a className="downlaod" id="download" href={this.state.download} download="meme.png" rel="noopener noreferrer" target="_blank">Download</a>
 		</div>
       );
     }
