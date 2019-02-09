@@ -1,10 +1,16 @@
 //Variables
-$cream: #E9E0B8;
-$teal: #5AA5A1;
-$red: #EA6542;
-$orange: #DE7930;
-$blue: #1E2857;
-$white: #fff;
+// $cream: #E9E0B8;
+// $teal: #5AA5A1;
+// $red: #EA6542;
+// $orange: #DE7930;
+// $blue: #1E2857;
+// $white: #fff;
+
+$white: #FAF7F6;
+$periwinkle:  #9DA7DE;
+$light-purple: #D0B7E3;
+$dark-purple: #5B518B;
+$rose: #AA5061;
 
 
 //typography
@@ -15,7 +21,7 @@ h1{
 }
 
 a{
-    color: $teal;
+    color: $rose;
 
     &:hover{
         text-decoration: underline;
@@ -28,16 +34,22 @@ input{
     margin: .5em;
 }
 
+.dropzone{
+    border: 2px dashed $rose;
+    padding: 1em;
+    color: $rose;
+}
+
 
 .App {
   text-align: center;
-  background: $cream;
+  background: $white;
   font-size: 16px;
-  color: $blue;
+  color: $dark-purple;
 }
 
 .App-header {
-  background-color: $red;
+  background-color: $periwinkle;
   display: flex;
   flex-direction: column;
   align-items: center;

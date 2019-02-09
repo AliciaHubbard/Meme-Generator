@@ -4,7 +4,7 @@ h1 {
 }
 
 a {
-    color: #5AA5A1;
+    color: #AA5061;
 }
 
 a:hover {
@@ -16,21 +16,27 @@ input {
     margin: .5em;
 }
 
+.dropzone {
+    border: 2px dashed #AA5061;
+    padding: 1em;
+    color: #AA5061;
+}
+
 .App {
     text-align: center;
-    background: #E9E0B8;
+    background: #FAF7F6;
     font-size: 16px;
-    color: #1E2857;
+    color: #5B518B;
 }
 
 .App-header {
-    background-color: #EA6542;
+    background-color: #9DA7DE;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: #fff;
+    color: #FAF7F6;
 }
 
 .main {
